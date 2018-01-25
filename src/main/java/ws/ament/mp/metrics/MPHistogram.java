@@ -3,7 +3,7 @@ package ws.ament.mp.metrics;
 import com.codahale.metrics.Histogram;
 import org.eclipse.microprofile.metrics.Snapshot;
 
-public class MPHistogram implements org.eclipse.microprofile.metrics.Histogram {
+public class MPHistogram implements org.eclipse.microprofile.metrics.Histogram, MPDropwizard<Histogram> {
     private final Histogram delegate;
 
     public MPHistogram(Histogram delegate) {
@@ -24,5 +24,10 @@ public class MPHistogram implements org.eclipse.microprofile.metrics.Histogram {
 
     public Snapshot getSnapshot() {
         return new MPSnapshot(this.delegate.getSnapshot());
+    }
+
+    @Override
+    public Histogram getDelegate() {
+        return delegate;
     }
 }

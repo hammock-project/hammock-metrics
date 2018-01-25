@@ -41,4 +41,5 @@ public class MPSnapshot extends Snapshot {
     public void dump(OutputStream outputStream) {
         delegate.dump(outputStream);
     }
+
 }

@@ -6,7 +6,7 @@ import org.eclipse.microprofile.metrics.Snapshot;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-public class MPTimer implements org.eclipse.microprofile.metrics.Timer {
+public class MPTimer implements org.eclipse.microprofile.metrics.Timer, MPDropwizard<Timer> {
     private final Timer delegate;
 
     MPTimer(Timer delegate) {
@@ -51,6 +51,11 @@ public class MPTimer implements org.eclipse.microprofile.metrics.Timer {
 
     public Snapshot getSnapshot() {
         return new MPSnapshot(delegate.getSnapshot());
+    }
+
+    @Override
+    public Timer getDelegate() {
+        return delegate;
     }
 
     private final class MPContext implements org.eclipse.microprofile.metrics.Timer.Context {

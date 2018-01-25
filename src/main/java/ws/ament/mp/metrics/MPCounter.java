@@ -2,7 +2,7 @@ package ws.ament.mp.metrics;
 
 import com.codahale.metrics.Counter;
 
-public class MPCounter implements org.eclipse.microprofile.metrics.Counter {
+public class MPCounter implements org.eclipse.microprofile.metrics.Counter, MPDropwizard<Counter> {
     private final Counter delegate;
 
     MPCounter(Counter delegate) {
@@ -27,5 +27,10 @@ public class MPCounter implements org.eclipse.microprofile.metrics.Counter {
 
     public long getCount() {
         return this.delegate.getCount();
+    }
+
+    @Override
+    public Counter getDelegate() {
+        return delegate;
     }
 }
